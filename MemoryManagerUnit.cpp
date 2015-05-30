@@ -1,7 +1,10 @@
 #include "MemoryManagerUnit.h"
+#include <iostream>
 
 MemoryManagerUnit::MemoryManagerUnit(int size, bool e) {
-
+	this->MemSize = size;
+	this->MemArrLen = size/sizeof(int);
+	this->Endian = e;
 }
 
 MemoryManagerUnit::~MemoryManagerUnit() {
@@ -9,11 +12,15 @@ MemoryManagerUnit::~MemoryManagerUnit() {
 }
 
 void MemoryManagerUnit::init() {
-
+	for (int i = 0; i < MemSize; i++) {
+		this->sb(i, i);
+	}
 }
 
 void MemoryManagerUnit::display(int adr, int n) {
-
+	for (int i = adr; i < n; ++i) {
+		std::cout << this->lb(i) << std::endl;
+	}
 }
 
 int MemoryManagerUnit::lw(int adr) {

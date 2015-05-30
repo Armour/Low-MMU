@@ -22,6 +22,7 @@ public:
 
 private:
 	int MemSize;
-	int Memory[100];
+	int MemArrLen;
+	int Memory[10000];
 	bool Endian;
 };
