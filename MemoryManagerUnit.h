@@ -1,28 +1,33 @@
+#ifndef MMU_H
+#define MMU_H
+
+#include <iostream>
+#include "Memory.h"
+#include "Reg.h"
+using namespace std;
+
 class MemoryManagerUnit {
 public:
-	MemoryManagerUnit(int size, bool e);
+	MemoryManagerUnit();
 	virtual ~MemoryManagerUnit();
+	int showEndian() { return mem->getEndian(); }
+	void switchEndian() { mem->setEndian(1 ^ mem->getEndian()); }
 
-	void init();
-	void display(int adr, int n);
+	void li(int addrT, unsigned int imm);
+	void lw(int addrT, int addrS, int offset);
+	void sw(int addrT, int addrS, int offset);
+	void lh(int addrT, int addrS, int offset);
+	void lhu(int addrT, int addrS, int offset);
+	void lb(int addrT, int addrS, int offset);
+	void lbu(int addrT, int addrS, int offset);
+	void sb(int addrT, int addrS, int offset);
 
-	int getMemSize();
-	bool getEndian();
-	void setMemSize(int MemSize);
-	void setEndian(bool Endian);
-
-	int lw(int adr);
-	void sw(int adr, int dat);
-	short lh(int adr);
-	short lhu(int adr);
-	void sh(int adr, short dat);
-	short lb(int adr);
-	short lbu(int adr);
-	void sb(int adr, char dat);
+	void listReg();
+	void listMem(int start, int stop);
 
 private:
-	int MemSize;
-	int MemArrLen;
-	int Memory[10000];
-	bool Endian;
+	Memory *mem;
+	Reg *reg;
 };
+
+#endif
